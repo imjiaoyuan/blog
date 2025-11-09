@@ -175,7 +175,7 @@ Debian 用了一段时间，我又不满足了，尝试装了 Arch，也很成�
 - Mermaid Tools，让 obsidian 文档可以解析 mermaid 图表
 - Mindmap NextGen，让 obsidian 支持 markmap 思维导图
 
-![](assets/20251109231054.webp1)
+![](assets/20251109231054.webp)
 
 ## 主动地接受信息
 
