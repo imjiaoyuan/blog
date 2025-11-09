@@ -4,7 +4,9 @@ import random
 import string
 from datetime import datetime
 
-POSTS_DIR = 'posts'
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+POSTS_DIR = os.path.join(PROJECT_ROOT, 'posts')
 
 def generate_alternating_id():
     return "".join(random.choice(string.ascii_lowercase) + random.choice(string.digits) for _ in range(3))
@@ -18,9 +20,10 @@ def create_new_post():
     label = input("Enter post label (default: uncategorized): ") or 'uncategorized'
     
     current_date = datetime.now().strftime('%Y-%m-%d')
-    slug = re.sub(r'[\s-]+', '-', re.sub(r'[^a-z0-9\s-]', '', title.lower())).strip('-')
+    title_slug = re.sub(r'[\s-]+', '-', re.sub(r'[^a-z0-9\s-]', '', title.lower())).strip('-')
+    post_slug = f"{current_date}-{title_slug}"
     
-    post_dir = os.path.join(POSTS_DIR, slug)
+    post_dir = os.path.join(POSTS_DIR, post_slug)
     if os.path.exists(post_dir):
         print(f"\nError: Directory '{post_dir}' already exists.")
         return
@@ -46,4 +49,6 @@ id: {generate_alternating_id()}
     print(f"  - Assets folder: {assets_dir}")
 
 if __name__ == "__main__":
+    if not os.path.exists(POSTS_DIR):
+        os.makedirs(POSTS_DIR)
     create_new_post()
